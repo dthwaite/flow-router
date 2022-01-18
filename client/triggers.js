@@ -83,11 +83,6 @@ Triggers.runTriggers = function(triggers, context, redirectFn, after) {
     }
   }
 
-  // mark that, we've exceeds the currentEventloop for
-  // this set of triggers.
-  inCurrentLoop = false;
-  after();
-
   function doRedirect(url, params, queryParams) {
     if(alreadyRedirected) {
       throw new Error("already redirected");
@@ -109,4 +104,10 @@ Triggers.runTriggers = function(triggers, context, redirectFn, after) {
   function doStop() {
     abort = true;
   }
+
+  // mark that, we've exceeds the currentEventloop for
+  // this set of triggers.
+  inCurrentLoop = false;
+  after();
+
 };
